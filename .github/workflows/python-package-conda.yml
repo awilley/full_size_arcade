@@ -1,0 +1,41 @@
+name: Repeat in a 15-second loop
+
+on:
+  # Allows you to manually trigger the workflow from the "Actions" tab
+  workflow_dispatch:
+  
+  # (Optional) If you'd also like to run it on `push`, uncomment:
+  # push:
+  #   branches: [ "main" ]
+
+jobs:
+  loop-job:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1) Check out the repo
+      - uses: actions/checkout@v3
+
+      # 2) Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      # 3) (Optional) Install any dependencies your script needs
+      - name: Install dependencies
+        run: |
+          pip install requests
+          # Add any other packages you need here
+
+      # 4) Run vote.py multiple times, sleeping 15 seconds between runs
+      - name: Run vote.py in a loop
+        run: |
+          # Adjust the loop count as needed. 
+          # Each iteration calls vote.py, then sleeps 15 seconds.
+          for i in {1..20}; do
+            echo "=== Iteration $i ==="
+            python vote.py
+            echo "Sleeping 15 seconds..."
+            sleep 15
+          done
