@@ -3,7 +3,7 @@ import requests
 import time
 
 # Define the number of iterations and delay between them
-n = 5000         # Number of times to run the loop
+n = 1         # Number of times to run the loop
 tdly = 12         # Delay in seconds between iterations
 
 # 1) Create a session to hold cookies across requests
